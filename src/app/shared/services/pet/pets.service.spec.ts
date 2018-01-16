@@ -12,7 +12,7 @@ import {
 import { MockBackend } from '@angular/http/testing';
 
 import { HttpClient } from '@angular/common/http';
-import { PetsService } from './pets.service';
+import { PetsService, genderEnum } from './pets.service';
 
 class MockHttpClient {
   public get(url: string): any {
@@ -78,7 +78,7 @@ describe('PetsService', () => {
     let sut: any = [
       {
        "name": "Bob",
-       "gender": "Male",
+       "gender": genderEnum.male,
        "age": 23,
        "pets": [
           {
@@ -93,7 +93,7 @@ describe('PetsService', () => {
      },
      {
         "name": "Jennifer",
-        "gender": "Female",
+        "gender": genderEnum.female,
         "age": 18,
         "pets": [
           {

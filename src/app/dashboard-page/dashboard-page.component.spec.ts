@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed , inject} from '@angular/core/testing';
 import { Observable } from 'rxjs/Rx';
 import { DashboardPageComponent } from './dashboard-page.component';
-import { PetsService, IPetOwner, IPet } from '../shared/services/pet/pets.service';
+import { PetsService, IPetOwner, IPet, genderEnum } from '../shared/services/pet/pets.service';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http } from '@angular/http';
 
@@ -11,8 +11,8 @@ class MockPetsService {
     return Observable.of([
       {
        name: "Bob",
-       gender: "Male",
-       age: 23,
+       gender: genderEnum.male,
+       age: "23",
        pets: [{
         name: "Bob",
         type: "cat",
