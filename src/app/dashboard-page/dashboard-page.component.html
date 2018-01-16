@@ -1,0 +1,23 @@
+<div id="main-wrapper" class="landing-page-main-wrapper">
+            <div class="landing-img-container">
+                <h2>here should show the coding practicel</h2>
+            </div>
+</div>
+<table>
+    <tr>
+        <td>
+            Female:<ul>
+                <li *ngFor="let pet of catsForFemaleOwner">{{pet.name}}
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+               Male: <ul>
+                        <li *ngFor="let pet of catsForMaleOwner">{{pet.name}}
+                        </li>
+                 </ul>
+        </td>
+    </tr>
+</table>
