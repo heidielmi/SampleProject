@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PetsService, IPetOwner, IPet, genderEnum } from '../shared/services/pet';
+import { PetsService } from '../shared/services/pet';
+import { genderEnum, IPetOwner, IPet } from '../shared/models/pet';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
@@ -18,7 +19,6 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   catsForMaleOwner_apparoach2: IPet[] = [];
 
   _sub: any;
-  _sub_rxjs: any;
 
   constructor(private _petsService: PetsService) { }
 
@@ -79,9 +79,6 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this._sub) {
       this._sub.unsubscribe();
-    }
-    if (this._sub_rxjs) {
-      this._sub_rxjs.unsubscribe();
     }
   }
 

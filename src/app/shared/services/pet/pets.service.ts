@@ -3,23 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import 'rxjs/Rx';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs/Rx';
+import { genderEnum, IPetOwner, IPet } from '../../models/pet';
 
-export enum genderEnum {
-  male,
-  female,
-  other
-}
-
-export interface IPetOwner {
-  name: string,
-  gender: genderEnum,
-  age: string,
-  pets: IPet[]
-}
-export interface IPet {
-  name: string,
-  type: string
-}
 export interface IPetService {
   getAllPetOwners(): Observable<IPetOwner[]>;
 }
