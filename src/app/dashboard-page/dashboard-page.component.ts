@@ -9,24 +9,23 @@ export type OwnersAndPets = { catsForFemales$: Observable<IPet[]>, catsForMales$
 
 export class DashboardPageComponent implements OnInit, OnDestroy {
   petOwners: IPetOwner[] = [];
-  femaleOwners: IPetOwner[] = [];
-  maleOwners: IPetOwner[] = [];
+
   catsForFemaleOwner: IPet[] = [];
   catsForMaleOwner: IPet[] = [];
 
   petOwners_apparoach2: IPetOwner[] = [];
   catsForFemaleOwner_apparoach2: IPet[] = [];
   catsForMaleOwner_apparoach2: IPet[] = [];
+
   _sub: any;
   _sub_rxjs: any;
 
-  ownersAndPets$: BehaviorSubject<IPetOwner[]> = new BehaviorSubject<IPetOwner[]>([]);
   constructor(private _petsService: PetsService) { }
 
   ngOnInit() {
-    this._sub = this._petsService.getAllPetOwners().subscribe(petOwnersApi => {
+    this._sub = this._petsService.getAllPetOwners().subscribe(petOwners$ => {
       //get all thge pet-owners from web service
-      this.petOwners = petOwnersApi;
+      this.petOwners = petOwners$;
 
       // filter female owners and their cats
       this.catsForFemaleOwner = this.populatePets(this.petOwners, "cat", genderEnum.female);
@@ -52,7 +51,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   }
 
   /**
-  *   get list of pet-owners and returns all their "cat" pets
+  *   get list of pet-owners and pet-type and gender 
+  *   returns all the pets for the criteria( based on the owner-gender and pet-type)
   */
   populatePets(owners: IPetOwner[], petType: string, gender: genderEnum): IPet[] {
     let calculatedCats: IPet[] = [];
@@ -62,28 +62,19 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
       .map(owner => owner.pets)
       // now should faltten this array of array
       .reduce((a, b) => a.concat(b), [])
-      .filter(pet => pet.type.toLowerCase() == petType);
-    this.sortListByName(calculatedCats, true);
+      .filter(pet => pet.type.toLowerCase() == petType)
+      .sort(function (a, b) {
+              if (a.name < b.name)
+                return 1;
+              if (a.name > b.name)
+                return -1;
+              return 0;  //no sorting
+            });
+    
     return calculatedCats;
   }
 
-  /**
-  *   sort list based on the pet's name
-  */
-  sortListByName(petList: IPet[], isAsc: boolean) {
-    petList.sort(function (a, b) {
 
-      var nameA = a.name;
-      var nameB = b.name;
-
-      if (nameA < nameB)
-        return (isAsc === true) ? -1 : 1;
-      if (nameA > nameB)
-        return (isAsc === true) ? 1 : -1;
-      return 0;  //no sorting
-
-    });
-  }
 
   ngOnDestroy() {
     if (this._sub) {
