@@ -16,6 +16,10 @@ class MockPetsService {
        pets: [{
         name: "Bob",
         type: "cat",
+       },
+       {
+        name: "edward",
+        type: "snake",
        }]
      }
      
@@ -56,7 +60,25 @@ describe('DashboardPageComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+  it('OnInit should return catsForFemaleOwner',  () => {
+    let sut: any = [];
 
+    component.ngOnInit();
+
+    expect(component.catsForFemaleOwner).toEqual(sut);
+  });
+
+  it('OnInit should return catsForMAleOwner',  () => {
+    let sut: any = [
+      {
+        name: "Bob",
+        type: "cat",
+       }];
+
+    component.ngOnInit();
+
+    expect(component.catsForMaleOwner).toEqual(sut);
+  });
   
 });
 

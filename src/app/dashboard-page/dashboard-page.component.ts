@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PetsService, IPetOwner, IPet, genderEnum } from '../shared/services/pet';
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
-export type OwnersAndPets = { catsForFemales$: Observable<IPet[]>, catsForMales$: Observable<IPet[]> };
+import { Observable } from 'rxjs/Rx';
+
 @Component({
   selector: 'sample-dashboard-page',
   templateUrl: './dashboard-page.component.html'
@@ -35,17 +35,17 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     });
 
     //second approach using RXJS(reactive programming)
-    this._petsService.getOwners();
-    this._sub_rxjs = this._petsService.owners$.subscribe(owners => {
-      this.petOwners_apparoach2 = owners;
-      // filter female owners and their cats
-      this.catsForFemaleOwner_apparoach2 = this.populatePets(this.petOwners_apparoach2, "cat", genderEnum.female);
+    // this._petsService.getOwners();
+    // this._sub_rxjs = this._petsService.owners$.subscribe(owners => {
+    //   this.petOwners_apparoach2 = owners;
+    //   // filter female owners and their cats
+    //   this.catsForFemaleOwner_apparoach2 = this.populatePets(this.petOwners_apparoach2, "cat", genderEnum.female);
 
-      // filter male owners and their cats
-      this.catsForMaleOwner_apparoach2 = this.populatePets(this.petOwners_apparoach2, "cat", genderEnum.male);
+    //   // filter male owners and their cats
+    //   this.catsForMaleOwner_apparoach2 = this.populatePets(this.petOwners_apparoach2, "cat", genderEnum.male);
 
 
-    });
+    // });
 
 
   }
