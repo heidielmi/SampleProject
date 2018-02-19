@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PetsService } from '../shared/services/pet';
-import { genderEnum, IPetOwner, IPet } from '../shared/models/pet';
+import { GenderEnum, IPetOwner, IPet } from '../shared/models/pet';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
@@ -28,10 +28,10 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
       this.petOwners = petOwners$;
 
       // filter female owners and their cats
-      this.catsForFemaleOwner = this.populatePets(this.petOwners, "cat", genderEnum.female);
+      this.catsForFemaleOwner = this.populatePets(this.petOwners, "cat", GenderEnum.female);
 
       // filter male owners and their cats
-      this.catsForMaleOwner = this.populatePets(this.petOwners, "cat", genderEnum.male);
+      this.catsForMaleOwner = this.populatePets(this.petOwners, "cat", GenderEnum.male);
     });
 
     //second approach using RXJS(reactive programming)
@@ -54,7 +54,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   *   get list of pet-owners and pet-type and gender 
   *   returns all the pets for the criteria( based on the owner-gender and pet-type)
   */
-  populatePets(owners: IPetOwner[], petType: string, gender: genderEnum): IPet[] {
+  populatePets(owners: IPetOwner[], petType: string, gender: GenderEnum): IPet[] {
     let calculatedCats: IPet[] = [];
 
     calculatedCats = owners.filter(petowner => petowner.gender === gender)

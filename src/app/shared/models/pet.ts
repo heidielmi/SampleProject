@@ -1,12 +1,12 @@
 
-export enum genderEnum {
+export enum GenderEnum {
     male,
     female,
     other
   }
   export interface IPetOwner {
     name: string,
-    gender: genderEnum,
+    gender: GenderEnum,
     age: string,
     pets: IPet[]
   }

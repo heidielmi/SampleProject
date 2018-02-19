@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import 'rxjs/Rx';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs/Rx';
-import { genderEnum, IPetOwner, IPet } from '../../models/pet';
+import { GenderEnum, IPetOwner, IPet } from '../../models/pet';
 
 export interface IPetService {
   getAllPetOwners(): Observable<IPetOwner[]>;
@@ -71,14 +71,14 @@ export class PetsService implements IPetService {
     });
   }
 
-  public ParseGender(value: string): genderEnum {
+  public ParseGender(value: string): GenderEnum {
     if (value.trim().toLowerCase() === 'male') {
-      return genderEnum.male;
+      return GenderEnum.male;
     }
     else if (value.trim().toLowerCase() === 'female') {
-      return genderEnum.female;
+      return GenderEnum.female;
     }
-    return genderEnum.other;
+    return GenderEnum.other;
   }
 
 }
